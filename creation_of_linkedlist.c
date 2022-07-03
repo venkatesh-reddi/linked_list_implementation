@@ -11,7 +11,7 @@ typedef struct Node node;
 
 node *CreateNode(int);
 node *CreateList(int);
-void traverse();
+void display();
 void insert_beg();
 void insert_end();
 void insert_mid(int);
@@ -41,7 +41,7 @@ void main()
                     break;
             case 2:
                     printf("\n***Display***\n");
-                    traverse();
+                    display();
                     break;
             case 3:
                     printf("\n***Insertion***\n");
@@ -111,7 +111,7 @@ node *CreateList(int n)
     return head;
 }
 
-void traverse()
+void display()
 {
     node *temp = head;
     printf("The linked list: ");
@@ -168,18 +168,18 @@ void insert_mid(int i)
 
 void delete(int i)
 {
-    node *temp;
-    int count = 2;
-    temp = head;
-    if(i == 1)
-    head = head -> next;
-    else
+    node *temp, *prev;
+    int count;
+    prev = temp = head;
+    for(count = 2; count < i; count++)
     {
-    if((i <= n) == 0 )
-        printf("Cannot be delete at the position %d.", i);
-    while(count++ < i)
-        temp = temp -> next;
-    temp -> next = temp -> next -> next;
-    n -= 1;
+        prev = prev -> next;
+        temp = prev -> next;
     }
+    if(i == 1)
+        head = head -> next;
+    else
+    prev -> next = temp -> next;
+    free(temp);
+    n -= 1;
 }
