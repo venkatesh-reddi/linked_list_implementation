@@ -45,28 +45,9 @@ void main()
                     break;
             case 3:
                     printf("\n***Insertion***\n");
-                    printf("\nInsertion at:\n1.At the beginning\n2.At the end\n3.At a position\n");
-                    printf("Enter the choice: ");
-                    scanf("%d", &choice2);
-                    switch(choice2)
-                    {
-                        case 1:
-                                printf("\nInsertion at the begining***\n");
-                                insert_beg();
-                                break;
-                        case 2:
-                                printf("\n***Insertion at the end***\n");
-                                insert_end();
-                                break;
-                        case 3:
-                                printf("\n***Insertion at the position***\n");
-                                printf("Enter the position of the node to be inserted: ");
-                                scanf("%d", &pos);
-                                insert_mid(pos);
-                                break;
-                        default:
-                                printf("Invalid choice....");
-                    }
+                    printf("Enter the position of the node to be inserted: ");                    
+                    scanf("%d", &pos);
+                    insert_mid(pos);
                     break;
             case 4:
                     printf("\n***Deletion***\n");
@@ -77,7 +58,7 @@ void main()
             case 5:
                     exit(0);
             default:
-                    printf("\nInvalid Choice...");
+                    printf("Invalid choice..\n");
         }
     }
 }
@@ -120,7 +101,7 @@ void display()
         printf("%d -> ", temp -> data);
         temp = temp -> next;
     }
-    printf("NULL");
+    printf("NULL\n\n");
 }
 
 
@@ -149,21 +130,22 @@ void insert_mid(int i)
 {
     node *newnode, *temp;
     int count = 2;
-    newnode = CreateNode(1);
     temp = head;
-    if(i == 1)
-        printf("Here you cannot insert at beginning");
-    if((i <= n) == 0 )
-        printf("Cannot be inserted at the position %d.", i);
-    
-    while(count++ < i)
+    if(i  > n + 1)
+        printf("Cannot be inserted at the position %d.\n\n", i);
+    else if(i == 1)
+        insert_beg();
+    else if(i == n)
+        insert_end();
+    else
+    {
+        newnode = CreateNode(1);
+        while(count++ < i)
         temp = temp -> next;
-    newnode -> next = temp -> next;
-    temp -> next = newnode;
-    n =+ 1;
-
-
-    
+        newnode -> next = temp -> next;
+        temp -> next = newnode;
+        n += 1;
+    }
 }
 
 void delete(int i)
