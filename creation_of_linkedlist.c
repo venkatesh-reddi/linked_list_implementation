@@ -16,18 +16,19 @@ void insert_beg();
 void insert_end();
 void insert_mid(int);
 void delete(int);
+void search(int);
 
 int n;
 node *head;
 
 void main()
 {
-    int choice1, choice2, pos;
+    int choice1, choice2, pos, ele;
     
     while(1)
     {
         printf("\n***Linked List MENU ***\n");
-        printf("\n1.Create\n2.Display\n3.Insert\n4.Delete\n5.Exit\n");
+        printf("\n1.Create\n2.Display\n3.Insert\n4.Delete\n5.Search\n6.Exit\n");
         printf("\nEnter your choice: ");
         scanf("%d", &choice1);
 
@@ -56,6 +57,12 @@ void main()
                     delete(pos);
                     break;
             case 5:
+                    printf("\n***Searching***\n");
+                    printf("Enter the element to search: ");
+                    scanf("%d", &ele);
+                    search(ele);
+                    break;
+            case 6:
                     exit(0);
             default:
                     printf("Invalid choice..\n");
@@ -164,4 +171,18 @@ void delete(int i)
     prev -> next = temp -> next;
     free(temp);
     n -= 1;
+}
+
+void search(int ele)
+{
+    int flag = 0;
+    for(node *temp = head; temp != NULL; temp = temp -> next)
+    {
+        if(ele == temp -> data)
+            flag++;
+    }
+    if(flag == 0)
+        printf("\n%d is not found in the linked list.\n\n", ele);
+    else
+        printf("\n%d is found %d time(s) in the linked list.\n\n", ele, flag);
 }
